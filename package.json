@@ -1,0 +1,27 @@
+{
+  "name": "xvfn",
+  "version": "0.0.2",
+  "description": "XPath functions for XVNode",
+  "main": "xvfn.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wshager/xvfn.git"
+  },
+  "keywords": [
+    "xpath",
+    "fn"
+  ],
+  "author": "W.S. Hager",
+  "license": "BSD-3-Clause",
+  "bugs": {
+    "url": "https://github.com/wshager/xvfn/issues"
+  },
+  "homepage": "https://github.com/wshager/xvfn#readme",
+  "dependencies": {
+    "xvseq": "0.0.1",
+    "xvtype": "0.0.0"
+  }
+}
