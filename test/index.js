@@ -1,5 +1,7 @@
-var xvfn = require("../lib/xvfn");
+var fn = require("../lib/xvfn");
 
-var xvseq = require("xvseq");
+var seq = require("xvseq").seq;
 
-console.log(xvfn.stringJoin(xvfn.parse(`<root><bla id="1">test</bla></root>`)));
+console.log(fn.stringJoin(fn.parse(`<root><bla id="1">test</bla></root>`)));
+
+console.log(fn.round(seq(0.4)));

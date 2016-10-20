@@ -1,14 +1,11 @@
 import {
-    seq, seqOf, toSeq,
-    subsequence, remove, head, tail, count, reverse, insertBefore,
-    filter, forEach, foldLeft, foldRight,
+    seq, toSeq,
     item, string, number, boolean, integer, double, float, decimal, data,
-    _isSeq, _first, _isNode
+    exactlyOne,
+    _isSeq, _first, _isNode, _boolean
 } from "xvtype";
 
 import { error } from "xverr";
-
-import { stringJoin, concat, analyzeString, tokenize, substring, stringToCodepoints, codepointsToString, matches, replace, stringLength } from "xvstring";
 
 import { Parser } from "xvtree";
 
@@ -51,14 +48,12 @@ export function position($_){
 }
 
 export function last($_){
-	return integer($_._position);
+	return integer($_._last + 1);
 }
 
 export function not($_) {
 	// TODO test for nodeseq and add error handling
-	return $_.map(function(_){
-        return !_;
-    });
+	return seq(!_boolean($_));
 }
 
 export function apply($fn,$a) {
@@ -79,21 +74,16 @@ export function sort(...a){
 	});
 }
 
+// TODO move back to xvtype
 export function round($a) {
-	if($a.size>1) return error("err:XPTY0004","Cardinality doesn't match function signature");
-	return seqOf(_first(a).round());
+    $a = exactlyOne($a);
+    if($a instanceof Error) return $a;
+    let a = _first($a);
+	return seq(a.round ? a.round() : Math.round(a));
 }
 
-export const booleans = {
-	true:function(){
-		return seqOf(true);
-	},
-	false:function(){
-		return seqOf(false);
-	}
-};
+export { error };
 
-export {
-    subsequence, remove, head, tail, count, reverse, insertBefore, forEach, filter, foldLeft, foldRight, error,
-    stringJoin, concat, analyzeString, tokenize, substring, stringToCodepoints, codepointsToString, matches, replace, stringLength
-};
+export * from "xvtype";
+export * from "xvstring";
+export * from "./booleans";
