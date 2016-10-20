@@ -44,11 +44,11 @@ export function name($a) {
 }
 
 export function position($_){
-	return integer($_._position + 1);
+	return integer($_.position());
 }
 
 export function last($_){
-	return integer($_._last + 1);
+	return integer($_.last());
 }
 
 export function not($_) {
@@ -79,7 +79,8 @@ export function round($a) {
     $a = exactlyOne($a);
     if($a instanceof Error) return $a;
     let a = _first($a);
-	return seq(a.round ? a.round() : Math.round(a));
+    if(!a) return seq();
+	return seq(typeof a.round === "function" ? a.round() : Math.round(a));
 }
 
 export { error };
