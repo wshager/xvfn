@@ -1,6 +1,6 @@
 {
   "name": "xvfn",
-  "version": "0.1.6",
+  "version": "0.1.8",
   "description": "XPath functions for XVNode",
   "main": "./lib/xvfn.js",
   "scripts": {
@@ -24,7 +24,7 @@
     "xverr": "0.0.5",
     "xvstring": "0.1.0",
     "xvtree": "^0.1.2",
-    "xvtype": "^0.1.5"
+    "xvtype": "^0.1.6"
   },
   "devDependencies": {
     "babel-cli": "^6.18.0",

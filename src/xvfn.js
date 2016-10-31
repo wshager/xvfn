@@ -61,7 +61,7 @@ export function apply($fn,$a) {
 	if(!(a instanceof Array)){
 		if(typeof a.toArray != "function") return error("");
 	}
-	return _first($fn).apply(this,a);
+	return _first($fn).apply(this,a.toArray());
 }
 
 // FIXME check if seq + apply data
@@ -78,7 +78,7 @@ export function sort(...a){
 export function round($a) {
     let a = _first($a);
     if(!a) return integer(0);
-	return seq(typeof a.round === "function" ? a.round() : Math.round(a));
+	return integer(typeof a.round === "function" ? a.round() : Math.round(a));
 }
 
 export { error };
