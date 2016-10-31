@@ -76,10 +76,8 @@ export function sort(...a){
 
 // TODO move back to xvtype
 export function round($a) {
-    $a = exactlyOne($a);
-    if($a instanceof Error) return $a;
     let a = _first($a);
-    if(!a) return seq();
+    if(!a) return integer(0);
 	return seq(typeof a.round === "function" ? a.round() : Math.round(a));
 }
 
