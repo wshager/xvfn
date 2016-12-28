@@ -1,6 +1,6 @@
 import {
     seq, toSeq,
-    item, string, number, boolean, integer, double, float, decimal, data,
+    item, string, number, boolean, integer, double, float, decimal, data, QName,
     exactlyOne,
     _isSeq, _first, _isNode, _boolean
 } from "xvtype";
@@ -14,6 +14,28 @@ import { Parser } from "xvtree";
 import { readFile, readDir } from "./readfile";
 
 const parser = new Parser();
+const modules = {
+    "http://www.w3.org/2005/xpath-functions":exports
+};
+
+export function module(location) {
+    // conflict?
+    //if (module.uri in modules) return;
+    var module = require(location);
+    modules[module.$uri] = module;
+    return module;
+}
+
+
+export function functionLookup($QName,$arity){
+    var QName = _first($QName);
+    var arity = _first($arity);
+    var uri = _first(QName._uri).toString();
+    var name = _first(QName._name).toString().split(":").pop();
+    var fn = modules[uri][name+"$"+arity];
+    if(!fn) fn = modules[uri][name];
+    return !!fn ? seq(fn) : seq();
+}
 
 export function doc($file){
     var file = _first($file);
