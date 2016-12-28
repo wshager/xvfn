@@ -26,12 +26,15 @@ export function module(location) {
     return module;
 }
 
+function camelCase(str) {
+    return str.split(/-/g).map((_,i) => i > 0 ? _.charAt(0).toUpperCase() + _.substr(1) : _).join("");
+}
 
 export function functionLookup($QName,$arity){
     var QName = _first($QName);
     var arity = _first($arity);
     var uri = _first(QName._uri).toString();
-    var name = _first(QName._name).toString().split(":").pop();
+    var name = camelCase(_first(QName._name).toString().split(":").pop());
     var fn = modules[uri][name+"$"+arity];
     if(!fn) fn = modules[uri][name];
     return !!fn ? seq(fn) : seq();
